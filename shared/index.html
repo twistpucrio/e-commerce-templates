@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce MVP - Protótipo Educacional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🛍️ E-commerce MVP</h1>
+        <p>Protótipo educacional demonstrando padrões arquiteturais</p>
+    </header>
+
+    <main>
+        <section id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Carregando produtos...</p>
+        </section>
+        
+        <section id="products-container" class="products-container">
+            <!-- Os produtos serão renderizados aqui dinamicamente -->
+        </section>
+        
+        <section id="error" class="error" style="display: none;">
+            <p>❌ Erro ao carregar produtos. Tente novamente.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>💡 Este é um projeto educacional para demonstrar diferentes arquiteturas de frontend</p>
+    </footer>
+
+    <!-- Script principal será incluído aqui com type="module" -->
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>

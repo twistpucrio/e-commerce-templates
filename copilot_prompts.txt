@@ -1,0 +1,140 @@
+PERSONA:
+
+Você é um Arquiteto de Software Sênior, especialista em JavaScript puro (vanilla JS) e padrões de arquitetura de frontend. Sua tarefa é criar o código-fonte para um protótipo de e-commerce muito simples para fins educacionais, demonstrando três abordagens arquiteturais diferentes.
+
+CONTEXTO:
+
+O público-alvo são estudantes de graduação em Ciência da Computação que estão aprendendo sobre desenvolvimento ágil. Eles só podem usar HTML, CSS e JavaScript puros (ES6 Modules), sem nenhum framework (React, Angular, Vue, etc.). O objetivo é que eles possam comparar e entender os prós e contras de cada arquitetura na prática.
+
+TAREFA PRINCIPAL:
+
+Gere o código completo para um MVP (Mínimo Produto Viável) de um e-commerce, implementado de três formas distintas, seguindo as arquiteturas:
+
+Arquitetura Baseada em Componentes (inspirada no React)
+
+Arquitetura MVC (Model-View-Controller)
+
+Arquitetura MVVM (Model-View-ViewModel)
+
+REQUISITOS COMUNS PARA AS TRÊS IMPLEMENTAÇÕES:
+
+Tecnologias: Use apenas HTML5, CSS3 e JavaScript (ES6 Modules).
+
+Funcionalidade do MVP:
+
+Ao carregar a página, buscar uma lista de produtos (use dados mockados, simulando uma chamada de API assíncrona com setTimeout).
+
+Exibir os produtos na tela. Cada produto deve mostrar nome, preço e uma imagem.
+
+Cada produto deve ter um botão "Adicionar ao Carrinho".
+
+Ao clicar no botão "Adicionar ao Carrinho", a aplicação deve registrar um console.log com o produto que foi adicionado. A atualização visual do carrinho é opcional, mas o evento de clique deve ser funcional.
+
+Estrutura de Arquivos: Para cada arquitetura, apresente uma estrutura de pastas clara e inclua o código completo para cada arquivo.
+
+Código Limpo: O código deve ser bem comentado, explicando as responsabilidades de cada arquivo e função.
+
+HTML e CSS: Crie um único arquivo index.html e um styles.css básico que possam ser reutilizados nas três implementações para manter a consistência visual.
+
+INSTRUÇÕES DETALHADAS PARA CADA ARQUITETURA:
+
+1. Implementação com Arquitetura Baseada em Componentes:
+
+Lógica: Crie funções que atuem como componentes, recebendo props (dados e funções) e retornando elementos do DOM.
+
+Gerenciamento de Estado: Utilize um objeto de estado global simples com um padrão de subscribe para notificar sobre mudanças e re-renderizar a UI.
+
+Estrutura de Arquivos Sugerida:
+
+/component-based
+|-- index.html
+|-- styles.css
+|-- /src
+    |-- /components
+    |   |-- ProductCard.js
+    |   |-- ProductList.js
+    |-- /services
+    |   |-- ProductService.js
+    |-- /store
+    |   |-- state.js
+    |-- app.js
+Detalhes:
+
+ProductService.js: Deve conter a função getProducts que retorna uma Promise com os dados mockados.
+
+state.js: Deve exportar getState, setState, e subscribe.
+
+ProductCard.js: Componente que renderiza um único produto.
+
+ProductList.js: Componente que recebe a lista de produtos do estado e renderiza múltiplos ProductCard.
+
+app.js: Ponto de entrada que busca os dados, atualiza o estado e renderiza a aplicação inicial.
+
+2. Implementação com Arquitetura MVC:
+
+Lógica: Separe claramente as responsabilidades entre Model, View e Controller.
+
+Comunicação: Use o padrão Observer, onde o Model notifica a View sobre as mudanças.
+
+Estrutura de Arquivos Sugerida:
+
+/mvc
+|-- index.html
+|-- styles.css
+|-- /src
+    |-- /models
+    |   |-- ProductModel.js
+    |   |-- CartModel.js
+    |-- /views
+    |   |-- ProductView.js
+    |-- /controllers
+    |   |-- ProductController.js
+    |-- /services
+    |   |-- ProductService.js
+    |-- app.js
+Detalhes:
+
+ProductModel.js: Gerencia a lista de produtos e notifica os observadores.
+
+ProductView.js: Responsável por renderizar a lista de produtos no DOM e associar eventos (como cliques) aos handlers do Controller.
+
+ProductController.js: Recebe a entrada do usuário da View, interage com o Model e atualiza a View.
+
+3. Implementação com Arquitetura MVVM:
+
+Lógica: Use um ViewModel para mediar a comunicação entre a View e o Model.
+
+Data Binding: Simule o data binding usando o padrão Observer (pode ser uma classe Observable simples) para que a View reaja automaticamente às mudanças nas propriedades do ViewModel.
+
+Estrutura de Arquivos Sugerida:
+
+/mvvm
+|-- index.html
+|-- styles.css
+|-- /src
+    |-- /models
+    |   |-- Product.js
+    |-- /viewmodels
+    |   |-- ProductListViewModel.js
+    |-- /views
+    |   |-- productListView.js
+    |-- /services
+    |   |-- ProductService.js
+    |-- app.js
+Detalhes:
+
+ProductListViewModel.js: Expõe propriedades observáveis (como products e isLoading) e comandos (como addToCart) que a View irá consumir.
+
+productListView.js: Uma função ou classe que se "inscreve" nas propriedades do ViewModel e atualiza o DOM quando elas mudam. Delega todas as ações do usuário para os comandos do ViewModel.
+
+FORMATO DA SAÍDA:
+
+Apresente a resposta de forma organizada. Para cada arquitetura, forneça:
+
+Uma breve explicação do padrão.
+
+A estrutura de diretórios.
+
+O bloco de código completo para cada arquivo, devidamente identificado com seu caminho (ex: // FILE: /mvc/src/models/ProductModel.js).
+
+Comece com os arquivos comuns (index.html, styles.css) e depois siga com a implementação de cada arquitetura, uma por vez.
