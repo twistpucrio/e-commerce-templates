@@ -1,0 +1,115 @@
+/* /ecommerce-mvc-spa/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+main {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.product-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.product-item h2 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.product-item .price {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#product-detail {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 5px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#product-detail img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+#product-detail h1 {
+    font-size: 2rem;
+}
+
+#product-detail .price {
+    color: #28a745;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+#product-detail p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
