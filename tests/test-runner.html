@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha@10.2.0/mocha.css" />
+</head>
+<body>
+    <div id="mocha"></div>
+    <script src="https://cdn.jsdelivr.net/npm/mocha@10.2.0/mocha.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chai@4.3.10/chai.min.js"></script>
+    <script>
+        // Setup mocha
+        mocha.setup('bdd');
+        
+        // Make chai globals available
+        const { expect, assert, should } = chai;
+        
+        // Also set them on window for global access
+        window.expect = expect;
+        window.assert = assert;
+        window.should = should;
+    </script>
+    <script src="../src/app.js"></script>
+    <script src="../src/core/EcommerceAPI.js"></script>
+    <script src="app.test.js"></script>
+    <script>
+        // Run tests when page loads
+        mocha.run();
+    </script>
+</body>
+</html>
