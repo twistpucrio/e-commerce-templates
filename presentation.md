@@ -32,7 +32,7 @@ section::after {
 </style>
 
 
-# E-Commerce MVP
+# E-Commerce MVP(Minimum Viable Product)
 
 **Andrey Rodrigues**
 Pesquisador e Desenvolvedor

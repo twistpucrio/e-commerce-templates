@@ -5,15 +5,15 @@ describe('EcommerceAPI Tests', () => {
         api = new EcommerceAPI();
     });
 
-    describe('foo function', () => {
-        it('should return "bar"', () => {
-            const result = api.foo();
-            expect(result).to.equal('bar');
+    describe('product list', () => {
+        it('product list', () => {
+            const result = api.listProducts();
+
+            expect(result).to.be.an('array');
+            expect(result.length).to.be.greaterThan(0);
+            expect(result[0]).to.have.property('id');
         });
 
-        it('should return a string', () => {
-            const result = api.foo();
-            expect(result).to.be.a('string');
-        });
+
     });
 });
