@@ -48,58 +48,10 @@ arodrigues@tecgraf.puc-rio.br
 - Tecnologia
 - Metodologias ágeis
 - Design, Arquitetura e Dev de software (_fullstack_)
-- Bikes, jogos, puzzles, cozinha
+- Esportes, Jogos, Cozinha
 - _???_
 
 --- 
-
-# Desenvolvimento Ágil de Software
-
-## Backlog
-
-- Refinado, Priorizado
-
- 
-
---- 
-
-# Desenvolvimento Ágil de Software
-
-## Dinâmica de Grupo (10 min): 
-
-- Criar o backlog
-
-
---- 
-
-# Desenvolvimento Ágil de Software
-
-## Sprint
-
-
----
-
-# Desenvolvimento Ágil de Software
-
-## Dinâmica de Grupo (10 min): 
-
-- Planejar sprints
-
-
-
-
---- 
-
-# Desenvolvimento Ágil de Software
-
-
-
-
-
-
---- 
-
----
 
 # Referências
 
