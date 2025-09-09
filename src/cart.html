@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - E-commerce</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { margin-right: 15px; font-size: 1.2em; }
+        #cart { max-width: 900px; margin: auto; }
+        h1 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .cart-item { display: flex; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cart-item img { border-radius: 4px; margin-right: 15px; }
+        .cart-item .info { flex-grow: 1; }
+        #cart-summary { text-align: right; margin-top: 20px; }
+        #cart-total { font-size: 1.5em; font-weight: bold; }
+        #checkout-btn { background-color: #28a745; color: white; border: none; padding: 12px 20px; font-size: 1.2em; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        #checkout-btn:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+
+    <div id="cart">
+        <h1>Your Shopping Cart</h1>
+        <div id="cart-items-container"></div>
+        <div id="cart-summary">
+
+            <div id="cart-total">Total: $0.00</div>
+            <button id="checkout-btn">Proceed to Checkout</button>
+        </div>
+        <button id="clearcart-btn"> Clear Cart </button>
+    </div>
+
+    <script src="./core/EcommerceAPI.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const api = new EcommerceAPI();
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const clearCartBtn = document.getElementById("clearcart-btn");
+            let removeItemBtn = document.getElementsByClassName('remover');
+            
+
+            function renderCart() {
+                const cart = api.getCart();
+                const allProducts = api.listProducts();
+                
+                const cartItemDetails = cart.products.map(productId => {
+                    return allProducts.find(p => p.id === productId);
+                }).filter(p => p); // Filter out undefined if a product is not found
+
+                if (cartItemDetails.length === 0) {
+                    cartItemsContainer.innerHTML = '<p>Your cart is empty. <a href="products.html">Continue shopping</a>.</p>';
+                    checkoutBtn.style.display = 'none'; // Hide checkout if cart is empty
+                } else {
+                    cartItemsContainer.innerHTML = '';
+                    cartItemDetails.forEach(item => {
+                        const itemEl = document.createElement('div');
+                        itemEl.className = 'cart-item';
+                        itemEl.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" width="60" height="60">
+                            <div class="info">
+                                <h4>${item.name}</h4>
+                                <div>$${item.price.toFixed(2)}</div>
+                            </div>
+                            <button class="remover" data-product-id="${item.id}">
+                                Remover
+                            </button>
+
+                        `;
+                        cartItemsContainer.appendChild(itemEl);
+                    });
+                    checkoutBtn.style.display = 'block';
+                }
+
+                cartTotalEl.textContent = `Total: $${cart.total.toFixed(2)}`;
+            }
+
+            checkoutBtn.addEventListener('click', () => {
+                const order = api.checkout();
+                if (order.success) {
+                    alert(`Checkout successful! Your order ID is ${order.orderId}. Total: $${order.total.toFixed(2)}`);
+                    renderCart(); // Re-render to show the empty cart
+                } else {
+                    alert('Could not process checkout. Your cart might be empty.');
+                }
+            });
+            clearCartBtn.addEventListener("click",() =>{
+                api.clearCart();
+                renderCart();
+            });
+            cartItemsContainer.addEventListener('click', (event) => {
+                console.log(event.target.dataset)
+                if (event.target.tagName=== 'BUTTON' && event.target.dataset.productId) {
+                    const productId = parseInt(event.target.dataset.productId, 10);
+                    api.removeItemFromCart(productId);
+                    renderCart();
+                    
+                }
+            });
+
+            renderCart();
+        });
+    </script>
+</body>
+</html>

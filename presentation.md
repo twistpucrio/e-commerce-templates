@@ -48,7 +48,7 @@ arodrigues@tecgraf.puc-rio.br
 - Tecnologia
 - Metodologias ágeis
 - Design, Arquitetura e Dev de software (_fullstack_)
-- Esportes, Jogos, Cozinha
+- Esportes, Jogos, Cozinhar
 - _???_
 
 --- 
@@ -56,8 +56,8 @@ arodrigues@tecgraf.puc-rio.br
 # Referências
 
 - [Manifesto for Agile Software Development](https://agilemanifesto.org/)
-- [The Clean Code Blog (Uncle Bob)](https://blog.cleancoder.com/)
- - https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
- - https://www.taniarascia.com/javascript-mvc-todo-app/
+- [The Clean Code Blog (Uncle Bob)](https://blog.cleancoder.com/) 
  - https://www.browserstack.com/guide/unit-testing-for-nodejs-using-mocha-and-chai
  - https://blog.logrocket.com/testing-node-js-mocha-chai
+ - TDD(Test Driven Development)
+ - BDD(Behaviour Driven Development)

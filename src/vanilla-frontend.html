@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce - Vanilla JS</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: space-around; padding: 20px; }
+        #products, #cart { border: 1px solid #ccc; padding: 20px; border-radius: 8px; width: 45%; }
+        h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .product-item { display: flex; align-items: center; margin-bottom: 15px; }
+        .product-item img { border-radius: 4px; margin-right: 15px; }
+        .product-item .info { flex-grow: 1; }
+        .product-item .price { font-weight: bold; }
+        button { background-color: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #cart-total { font-size: 1.2em; font-weight: bold; text-align: right; margin-top: 20px; }
+        #checkout-btn { background-color: #28a745; display: block; width: 100%; margin-top: 15px; padding: 12px; font-size: 1.1em; }
+        #checkout-btn:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+    <div id="products">
+        <h2>Products</h2>
+        <div id="product-list"></div>
+    </div>
+
+    <div id="cart">
+        <h2>Shopping Cart</h2>
+        <div id="cart-items">Your cart is empty.</div>
+        <div id="cart-total">Total: $0.00</div>
+        <button id="checkout-btn">Checkout</button>
+    </div>
+
+    <script src="./core/EcommerceAPI.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const api = new EcommerceAPI();
+
+            const productListEl = document.getElementById('product-list');
+            const cartItemsEl = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            // Function to render all products
+            function renderProducts() {
+                const products = api.listProducts();
+                productListEl.innerHTML = ''; // Clear existing products
+
+                products.forEach(product => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'product-item';
+                    itemEl.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" width="50" height="50">
+                        <div class="info">
+                            <div>${product.name}</div>
+                            <div class="price">$${product.price.toFixed(2)}</div>
+                        </div>
+                        <button data-product-id="${product.id}">Add to Cart</button>
+                    `;
+                    productListEl.appendChild(itemEl);
+                });
+            }
+
+            // Function to render cart items and total
+            function renderCart() {
+                const cart = api.getCart();
+                const products = api.listProducts();
+                const cartItemDetails = cart.products.map(productId => products.find(p => p.id === productId));
+
+                if (cartItemDetails.length === 0) {
+                    cartItemsEl.innerHTML = 'Your cart is empty.';
+                } else {
+                    cartItemsEl.innerHTML = ''; // Clear cart
+                    cartItemDetails.forEach(item => {
+                         if(item) cartItemsEl.innerHTML += `<div>${item.name} - $${item.price.toFixed(2)}</div>`;
+                    });
+                }
+                cartTotalEl.textContent = `Total: $${cart.total.toFixed(2)}`;
+            }
+
+            // Event Delegation for "Add to Cart" buttons
+            productListEl.addEventListener('click', (event) => {
+                if (event.target.tagName === 'BUTTON' && event.target.dataset.productId) {
+                    const productId = parseInt(event.target.dataset.productId, 10);
+                    api.addToCart(productId);
+                    renderCart(); // Update the cart view
+                }
+            });
+
+            // Event listener for the checkout button
+            checkoutBtn.addEventListener('click', () => {
+                const order = api.checkout();
+                if (order.success && order.products.length > 0) {
+                    alert(`Checkout successful!\\nOrder ID: ${order.orderId}\\nTotal: $${order.total.toFixed(2)}`);
+                    renderCart(); // Re-render the cart, which is now empty
+                } else {
+                    alert('Your cart is empty. Add items before checking out.');
+                }
+            });
+
+            // Initial render
+            renderProducts();
+            renderCart();
+        });
+    </script>
+</body>
+</html>
