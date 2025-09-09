@@ -44,7 +44,9 @@
             const cartItemsContainer = document.getElementById('cart-items-container');
             const cartTotalEl = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
-            const clearCartBtn= document.getElementById("clearcart-btn");
+            const clearCartBtn = document.getElementById("clearcart-btn");
+            let removeItemBtn = document.getElementsByClassName('remover');
+            
 
             function renderCart() {
                 const cart = api.getCart();
@@ -68,6 +70,10 @@
                                 <h4>${item.name}</h4>
                                 <div>$${item.price.toFixed(2)}</div>
                             </div>
+                            <button class="remover" data-product-id="${item.id}">
+                                Remover
+                            </button>
+
                         `;
                         cartItemsContainer.appendChild(itemEl);
                     });
@@ -90,7 +96,15 @@
                 api.clearCart();
                 renderCart();
             });
-
+            cartItemsContainer.addEventListener('click', (event) => {
+                console.log(event.target.dataset)
+                if (event.target.tagName=== 'BUTTON' && event.target.dataset.productId) {
+                    const productId = parseInt(event.target.dataset.productId, 10);
+                    api.removeItemFromCart(productId);
+                    renderCart();
+                    
+                }
+            });
 
             renderCart();
         });

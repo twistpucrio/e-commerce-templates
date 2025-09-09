@@ -92,6 +92,14 @@ class EcommerceAPI {
         this._saveCart();
 
     }
+
+    removeItemFromCart(productId) {
+        const index = this.cart.indexOf(productId);
+        if (index > -1) {
+            this.cart.splice(index, 1);
+            this._saveCart(); // Save cart after modification
+        }
+    }
 }
 
 // Make it available globally for testing
