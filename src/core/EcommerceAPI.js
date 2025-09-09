@@ -26,7 +26,26 @@ class EcommerceAPI {
                 image: 'https://via.placeholder.com/300x300.png?text=Backpack'
             }
         ];
-        this.cart = [];
+        // Load cart from localStorage or initialize as empty array
+        this.cart = this._loadCart();
+    }
+
+    _loadCart() {
+        try {
+            const cartJson = localStorage.getItem('ecommerce_cart');
+            return cartJson ? JSON.parse(cartJson) : [];
+        } catch (e) {
+            console.error("Failed to load cart from localStorage", e);
+            return [];
+        }
+    }
+
+    _saveCart() {
+        try {
+            localStorage.setItem('ecommerce_cart', JSON.stringify(this.cart));
+        } catch (e) {
+            console.error("Failed to save cart to localStorage", e);
+        }
     }
     
     listProducts() {
@@ -37,6 +56,7 @@ class EcommerceAPI {
         const product = this.products.find(p => p.id === productId);
         if (product) {
             this.cart.push(productId);
+            this._saveCart(); // Save cart after modification
         }
     }
 
@@ -63,6 +83,7 @@ class EcommerceAPI {
         };
 
         this.cart = [];
+        this._saveCart(); // Clear the cart in localStorage as well
 
         return order;
     }
