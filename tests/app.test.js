@@ -7,6 +7,8 @@ describe('EcommerceAPI Tests', () => {
 
     describe('cart checkout', () => {
         it('should, list, add and checkout', () => {
+
+            // List Products
             const result = api.listProducts();
 
             expect(result).to.be.an('array');
@@ -14,6 +16,8 @@ describe('EcommerceAPI Tests', () => {
             expect(result[0]).to.have.property('id');
 
             const productToAdd = result[0];
+
+            // Add to Cart
             api.addToCart(productToAdd.id);
             const cart = api.getCart();
 
@@ -23,6 +27,7 @@ describe('EcommerceAPI Tests', () => {
             expect(cart).to.have.property('total');
             expect(cart.total).to.equal(productToAdd.price);
 
+            // Checkout
             checkout = api.checkout();
             expect(checkout).to.be.an('object');
             expect(checkout).to.have.property('success', true);
