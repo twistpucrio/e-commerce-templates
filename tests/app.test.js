@@ -3,6 +3,7 @@ describe('EcommerceAPI Tests', () => {
 
     beforeEach(() => {
         api = new EcommerceAPI();
+        api.checkout(); // Clear cart before each test
     });
 
     describe('cart checkout', () => {
