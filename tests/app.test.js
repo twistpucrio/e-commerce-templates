@@ -42,7 +42,36 @@ describe('EcommerceAPI Tests', () => {
             expect(emptyCart.total).to.equal(0);
 
         });
+         it('should,remove, itens from cart', () => {
+            
+            // List Products
+            const result = api.listProducts();
 
+            expect(result).to.be.an('array');
+            expect(result.length).to.be.greaterThan(0);
+            expect(result[0]).to.have.property('id');
+
+            const productToAdd = result[0];
+
+            // Add to Cart
+            api.addToCart(productToAdd.id);
+            const cart = api.getCart();
+
+            expect(cart).to.be.an('object');
+            expect(cart).to.have.property('products').that.is.an('array');
+            expect(cart.products).to.include(productToAdd.id);
+            expect(cart).to.have.property('total');
+            expect(cart.total).to.equal(productToAdd.price);
+
+            
+            api.clearCart();
+        
+
+            const emptyCart = api.getCart();
+            expect(emptyCart.products).to.be.an('array').that.is.empty;
+            expect(emptyCart.total).to.equal(0);
+
+        });
 
 
 

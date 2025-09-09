@@ -82,10 +82,15 @@ class EcommerceAPI {
             products: cartData.products,
         };
 
-        this.cart = [];
-        this._saveCart(); // Clear the cart in localStorage as well
+        this.clearCart();
 
         return order;
+    }
+
+    clearCart() {
+        this.cart = [];
+        this._saveCart();
+
     }
 }
 

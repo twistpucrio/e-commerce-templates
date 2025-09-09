@@ -30,9 +30,11 @@
         <h1>Your Shopping Cart</h1>
         <div id="cart-items-container"></div>
         <div id="cart-summary">
+
             <div id="cart-total">Total: $0.00</div>
             <button id="checkout-btn">Proceed to Checkout</button>
         </div>
+        <button id="clearcart-btn"> Clear Cart </button>
     </div>
 
     <script src="./core/EcommerceAPI.js"></script>
@@ -42,6 +44,7 @@
             const cartItemsContainer = document.getElementById('cart-items-container');
             const cartTotalEl = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
+            const clearCartBtn= document.getElementById("clearcart-btn");
 
             function renderCart() {
                 const cart = api.getCart();
@@ -83,6 +86,11 @@
                     alert('Could not process checkout. Your cart might be empty.');
                 }
             });
+            clearCartBtn.addEventListener("click",() =>{
+                api.clearCart();
+                renderCart();
+            });
+
 
             renderCart();
         });

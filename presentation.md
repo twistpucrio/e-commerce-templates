@@ -48,7 +48,7 @@ arodrigues@tecgraf.puc-rio.br
 - Tecnologia
 - Metodologias ágeis
 - Design, Arquitetura e Dev de software (_fullstack_)
-- Esportes, Jogos, Cozinha
+- Esportes, Jogos, Cozinhar
 - _???_
 
 --- 
